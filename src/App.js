@@ -4,7 +4,7 @@ import './App.css';
 import {useState, useEffect} from 'react'
 
 const MESSAGES = [
-  "כמה ספרות יש בABC",
+  "ABCכמה אותיות יש ב",
   "מה התשובה לקיום?",
   "האם אתה מעוניין להיות בהנדסת תוכנה"
 ]
@@ -17,7 +17,7 @@ const ANSWERS = [
 ]
 function App() {
   const [message, setMessage] = useState("ברוכים הבאים!")
-  const [className, setClassName] = useState("")
+  const [className, setClassName] = useState("normal fadeInClass")
   useEffect(() => {
       console.log("Hey ONCE")
   }, [])

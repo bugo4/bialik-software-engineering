@@ -5,28 +5,25 @@ var setMessageFunc;
 let counter = 0;
 
 export default function Mission( {message, setMessage, MESSAGES, ANSWERS, className, setClassName} ) {
-    const input = useRef()
+    const input = useRef();
     
     setMessageFunc = setMessage;
     function handleInputChanged(){
         if (input.current.value === ANSWERS[counter]){
             if (counter < MESSAGES.length){
                 setMessageFunc(MESSAGES[counter])
+                new Audio("./successSound.mp3").play();
                 counter++;
+                input.current.value = "";
+                input.current.placeholder = "רשמו את התשובה כאן";
             }
             else{
-                setMessageFunc("מקומכם איתנו!");
-                input.current.hidden = true;
-                setClassName("App-header")
-            }
-        } else if (input.current.value === ANSWERS[counter]){
-            if (counter < MESSAGES.length){
-                setMessageFunc(MESSAGES[counter++])
-            }
-            else{
-                setMessageFunc("ניצחון!");
-                input.current.hidden = true;
-                setClassName("App-header")
+                setClassName("normal fadeOutClass")
+                // input.current.className = "fadeOutClass";
+                setTimeout(() => { 
+                    setMessageFunc('מקומכם איתנו');
+                    setClassName("App-header fadeInClass")
+                }, 1000);                
             }
         }
     }
@@ -34,8 +31,7 @@ export default function Mission( {message, setMessage, MESSAGES, ANSWERS, classN
     return (
         <div>
             <Question message={message} currentClass={className}/>
-            <br/>
-            <input ref={input} type="text" placeholder="רשום את תשובתך כאן" onChange={handleInputChanged}/>
+            <input ref={input} type="text" placeholder="רשמו היי כדי להתחיל" onChange={handleInputChanged}/>
         </div>
     )
 }
